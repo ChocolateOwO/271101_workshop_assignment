@@ -1,11 +1,7 @@
 #This code demonstrate how to show location of hand landmark
 import cv2
 import mediapipe as mp
-
-Nfing = 5
-
 cap = cv2.VideoCapture(0)
-
 #Call hand pipe line module
 mpHands = mp.solutions.hands
 hands = mpHands.Hands()
@@ -55,26 +51,22 @@ while True:
                 if id == 18:
                     id18 = int(id)
                     cy18 = cy  
-            
-            
-            if cy20 > cy18:
-                Nfing = 0
-            elif cy16 > cy15:
-                Nfing = 1
-            elif cy12 > cy10:
-                Nfing = 2
-            elif cy8 > cy7:
-                Nfing = 3 
-            elif cx3 > cx4:
-                Nfing = 4
-            else:
-                Nfing = 5
+
+            if cy20 < cy18:
+                cv2.putText(img, "Little finger is showing", (10, 200), cv2.FONT_HERSHEY_PLAIN, 1.5,(49, 229, 238), 2)
+            if cy16 < cy15:
+                cv2.putText(img, "Ring finger is showing", (10, 250), cv2.FONT_HERSHEY_PLAIN, 1.5,(160, 100, 224), 2)
+            if cy12 < cy10:
+               cv2.putText(img, "Middle finger is showing", (10, 300), cv2.FONT_HERSHEY_PLAIN, 1.5,(231, 44, 143), 2)
+            if cy8 < cy7:
+                cv2.putText(img, "Index finger is showing ", (10, 350), cv2.FONT_HERSHEY_PLAIN, 1.5,(231, 146, 44), 2)
+            if cx3 < cx4:
+                cv2.putText(img, "Thumb is showing ", (10, 400), cv2.FONT_HERSHEY_PLAIN, 1.5,(44, 231, 50), 2)
+
 
             mpDraw.draw_landmarks(img, handLms, mpHands.HAND_CONNECTIONS)
 
-    cv2.putText(img, str(int(Nfing)), (10, 70), cv2.FONT_HERSHEY_PLAIN, 3,
-                (255, 0, 50), 3)
-    cv2.putText(img, "chaem", (450, 450), cv2.FONT_HERSHEY_PLAIN, 3, (156, 246, 139), 3)
+    cv2.putText(img, "Nidchima Boonkhwan-660610829", (200, 450), cv2.FONT_HERSHEY_PLAIN, 1.6, (156, 246, 139), 3)
 
     
     cv2.imshow("Image", img)
